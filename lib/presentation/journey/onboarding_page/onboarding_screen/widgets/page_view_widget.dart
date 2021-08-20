@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PageViewWidget extends StatefulWidget {
   final PageController pageController;
-  const PageViewWidget({Key? key, required this.pageController})
+  final AnimationController animationController;
+  const PageViewWidget({Key? key, required this.pageController,required this.animationController})
       : super(key: key);
 
   @override
@@ -22,6 +23,14 @@ class _PageViewWidgetState extends State<PageViewWidget> {
     super.initState();
     widget.pageController
       ..addListener(() {
+   if(widget.pageController.page==1){
+     widget.animationController.animateTo(0.2);
+   }else if(widget.pageController.page==2){
+     widget.animationController.animateTo(0.4);
+   }
+   else if(widget.pageController.page==0){
+     widget.animationController.animateTo(0);
+   }
         setState(() {
           pageOffset = widget.pageController.page;
         });
@@ -36,11 +45,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
         double scale = max(viewportFraction,
             (1 - (pageOffset! - index).abs()) + viewportFraction);
         return Container(
-          margin: EdgeInsets.only(
-            right: 24.w,
-            top: 50.h - scale * 25.h,
-            bottom: 50.h - scale * 25.h,
-          ),
+          margin: EdgeInsets.symmetric(horizontal: 12.sp,vertical: 50.h - scale * 25.h),
         decoration: BoxDecoration(
             color: Colors.red,
           borderRadius: BorderRadius.all(Radius.circular(15.sp)),

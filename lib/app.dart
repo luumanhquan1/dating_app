@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: Size(375, 812),
       builder:()=> MaterialApp(
            theme: ThemeDataSetUp.themeDate,
        onGenerateRoute: Routes.generateRoute,

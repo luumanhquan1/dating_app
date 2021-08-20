@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeDataSetUp {
-  static TextStyle bodyText1 = TextStyle(
+  static TextStyle subtitle1Text = TextStyle(
       color: ColorsHex.getColorFromHex('#323755'),
       fontSize: 14.sp,
       fontStyle: FontStyle.normal,
@@ -21,7 +21,7 @@ class ThemeDataSetUp {
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       fontFamily: "Ag");
-  static TextStyle subtitleText = TextStyle(
+  static TextStyle headline2Text = TextStyle(
       color: ColorsHex.getColorFromHex('#E94057'),
       fontSize: 24.sp,
       fontStyle: FontStyle.normal,
@@ -30,10 +30,12 @@ class ThemeDataSetUp {
 
   static ThemeData themeDate = ThemeData(
     textTheme: TextTheme(
-        bodyText1: bodyText1,
-        button: buttonText,
-        headline1: headlineText,
-        subtitle1: subtitleText),
+      subtitle1: subtitle1Text,
+      button: buttonText,
+      headline1: headlineText,
+      headline2: headline2Text,
+    ),
+    canvasColor: ColorsHex.getColorFromHex('#000000'),
     backgroundColor: ColorsHex.getColorFromHex('#E5E5E5'),
     buttonColor: ColorsHex.getColorFromHex('#E94057'),
   );

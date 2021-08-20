@@ -1,5 +1,6 @@
 import 'package:dating_app/common/constance/route_constance.dart';
 import 'package:dating_app/presentation/journey/onboarding_page/route_boarding.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,8 @@ class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteList.onBoarding:
-        return MaterialPageRoute(
+      case RouteList.singIn:
+        return CupertinoPageRoute(
             builder: generateRouteAll(settings)[settings.name]!,
             settings: settings);
     }
