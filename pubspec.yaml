@@ -24,6 +24,18 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.0.0+2
+  pretty_dio_logger: ^1.1.1
+  injectable: ^1.4.1
+  json_annotation: ^4.0.1
+  dio: ^4.0.0
+  shared_preferences: ^2.0.6
+  logger: ^1.0.0
+  flutter_svg: ^0.22.0
+  get_it: ^7.2.0
+  flutter_tindercard: ^0.2.0
+  rxdart: ^0.27.1
+  cached_network_image: ^3.2.0
+  blur: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,7 +74,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
   fonts:
+     - family: MyFlutterApp
+       fonts:
+         - asset: assets/fonts/MyFlutterApp.ttf
      - family: Ag
        fonts:
          - asset: assets/fonts/Sk-Modernist-Regular.ttf

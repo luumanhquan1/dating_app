@@ -15,6 +15,8 @@ class Routes {
     switch (settings.name) {
       case RouteList.onBoarding:
       case RouteList.singIn:
+      case RouteList.myMobile:
+      case RouteList.otpScreen:
         return CupertinoPageRoute(
             builder: generateRouteAll(settings)[settings.name]!,
             settings: settings);

@@ -1,4 +1,5 @@
 import 'package:dating_app/common/constance/layout_constance.dart';
+import 'package:dating_app/common/constance/route_constance.dart';
 import 'package:dating_app/presentation/journey/widgets/button_widget.dart';
 import 'package:dating_app/presentation/journey/widgets/icon_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,9 @@ class _SingInScreenState extends State<SingInScreen> {
                   ),
                   ButtonWidget(
                     buttonTxt: 'Use phone number',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, RouteList.myMobile);
+                    },
                     isButtonColor: false,
                   ),
                   SizedBox(

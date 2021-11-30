@@ -5,25 +5,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ThemeDataSetUp {
   static TextStyle subtitle1Text = TextStyle(
       color: ColorsHex.getColorFromHex('#323755'),
-      fontSize: 14.sp,
+      fontSize: 14,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.normal,
       fontFamily: "Ag");
   static TextStyle buttonText = TextStyle(
       color: ColorsHex.getColorFromHex('#FFFFFF'),
-      fontSize: 16.sp,
+      fontSize: 16,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       fontFamily: "Ag");
   static TextStyle headlineText = TextStyle(
       color: ColorsHex.getColorFromHex('#000000'),
-      fontSize: 34.sp,
+      fontSize: 34,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       fontFamily: "Ag");
   static TextStyle headline2Text = TextStyle(
       color: ColorsHex.getColorFromHex('#E94057'),
-      fontSize: 24.sp,
+      fontSize: 24,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.bold,
       fontFamily: "Ag");
@@ -36,7 +36,7 @@ class ThemeDataSetUp {
       headline2: headline2Text,
     ),
     canvasColor: ColorsHex.getColorFromHex('#000000'),
-    backgroundColor: ColorsHex.getColorFromHex('#E5E5E5'),
+    backgroundColor: ColorsHex.getColorFromHex('#FFFFFF'),
     buttonColor: ColorsHex.getColorFromHex('#E94057'),
   );
 }

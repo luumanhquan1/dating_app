@@ -1,0 +1,42 @@
+Cài đặt các framework sau
+
+1. json_annotation
+flutter pub add json_annotation
+2. connectivity
+flutter pub add connectivity
+3. injectable_generator
+flutter pub add injectable_generator
+4. shared_preferences
+flutter pub add shared_preferences
+5. equatable
+flutter pub add equatable
+6. data_connection_checker
+flutter pub add data_connection_checker
+7. pretty_dio_logger
+flutter pub add pretty_dio_logger
+8. logger
+flutter pub add logger
+
+
+
+////////////TAO 1 API SERVICE ////////
+BUOC 1
+
+import '../api_client.dart';
+import 'package:injectable/injectable.dart';
+
+@singleton
+class ServiceTemplate {
+  final ApiClient _apiClient;
+
+  ServiceTemplate(this._apiClient);
+}
+
+
+BUOC 2:
+Dang ky voi Dependency Injection
+/BusinessLayer/DataAccess/Http/Core/Di/di.iconfig.dart
+
+CACH DUNG:
+- Chúng ta không khởi tạo instance của service trực tiếp. Mà get instance qua DI
+RecipeService get service => getIt<RecipeService>();
