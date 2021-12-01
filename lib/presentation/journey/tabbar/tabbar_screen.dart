@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dating_app/presentation/journey/tabbar/tabbar_item.dart';
 import 'package:dating_app/presentation/journey/tabbar/widgets/botom_navigator_widget.dart';
 
@@ -17,6 +19,11 @@ class _TabbarScreenState extends State<TabbarScreen>
   void initState() {
     // TODO: implement initState
     tabController = TabController(length: 4, vsync: this);
+    tabController.addListener(() {
+      setState(() {
+
+      });
+    });
     super.initState();
   }
 
@@ -25,7 +32,7 @@ class _TabbarScreenState extends State<TabbarScreen>
     super.build(context);
     return Scaffold(
       body: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        physics:tabController.index==0? NeverScrollableScrollPhysics():null,
           controller: tabController,
           children: tabBarItem.values.map((e) => e.getScreen()).toList()),
       bottomNavigationBar: BottomNavigatorWidget(

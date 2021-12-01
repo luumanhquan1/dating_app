@@ -3,13 +3,18 @@ import 'dart:ui';
 
 import 'package:dating_app/data/remote_data/model/user_model.dart';
 import 'package:dating_app/presentation/journey/home_screen/Widgets/custom_img_widget.dart';
+import 'package:dating_app/presentation/journey/home_screen/Widgets/infor_user_widget.dart';
+import 'package:dating_app/presentation/journey/home_screen/Widgets/page_index_widget.dart';
 import 'package:dating_app/presentation/journey/home_screen/view_model/home_screen_view_model.dart';
+import 'package:dating_app/presentation/journey/profile_screen/profile_screen.dart';
 import 'package:dating_app/presentation/journey/widgets/app_bar/default_app_bar_widget.dart';
 import 'package:dating_app/presentation/journey/widgets/tinder_widget.dart/tinder_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:blur/blur.dart';
+
+import 'Widgets/icon_set_trang_thai_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,6 +53,9 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 24,
+          ),
           Expanded(
             child: StreamBuilder<List<UserModel>>(
                 stream: viewModel.getListUserBloc,
@@ -56,87 +64,66 @@ class _HomeScreenState extends State<HomeScreen>
                   if (snapshot.hasData) {
                     return TinderSwapCard(
                       swipeCompleteCallback: (origin, index) {
-                        log('${index}');
+                        // log('${index}');
                       },
                       swipeUpdateCallback: (a, w) {
-                        log('${a}');
+                        // log('${w}');
                       },
                       orientation: AmassOrientation.TOP,
                       stackNum: 2,
                       totalNum: data.length,
                       maxWidth: MediaQuery.of(context).size.width,
-                      maxHeight: MediaQuery.of(context).size.height * 0.70,
+                      maxHeight: MediaQuery.of(context).size.height * 0.78,
                       minWidth: MediaQuery.of(context).size.width * 0.60,
                       minHeight: MediaQuery.of(context).size.height * 0.4,
                       cardBuilder: (context, index) {
                         final userInfor = data[index];
                         final List<ListImg> listImg = data[index].listImg;
-
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: size.width,
-                                  height: size.height,
-                                  child: ListImgWidget(listImg: listImg),
-                                ),
-                                Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Stack(
-                                      children: [
-                                        Blur(
-                                          blur: 15,
-                                          blurColor: Colors.transparent,
-                                          colorOpacity: 0,
-                                          child: Container(
-                                            height: 90,
-                                            decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                backgroundBlendMode:
-                                                    BlendMode.softLight),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                             const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                '${userInfor.hoTen}, ${userInfor.age}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline2
-                                                    ?.copyWith(
-                                                        color: Color(0xffFFFFFF)),
-                                              ),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                '${userInfor.msv}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle1
-                                                    ?.copyWith(
-                                                        color: Color(0xffFFFFFF)),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ))
-                              ],
+                        final PageController pageController = PageController();
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfileScreen(id: userInfor.id)));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: size.width,
+                                    height: size.height,
+                                    color: Colors.transparent,
+                                    child: ListImgWidget(
+                                      listImg: listImg,
+                                      controller: pageController,
+                                      cardController: controller,
+                                    ),
+                                  ),
+                                  Positioned(
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: InfoUserWidget(
+                                        userModel: userInfor,
+                                      )),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 85),
+                                      child: PageIndexWidget(
+                                        controller: pageController,
+                                        pageIndex: listImg.length,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -147,6 +134,71 @@ class _HomeScreenState extends State<HomeScreen>
                   return SizedBox();
                 }),
           ),
+          Container(
+            margin: EdgeInsets.only(left: 40, right: 40, bottom: 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    controller.triggerLeft();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(31.5),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0xff000000).withOpacity(0.07),
+                              offset: Offset(0, 20),
+                              blurRadius: 50)
+                        ]),
+                    child: SvgPicture.asset('assets/icons/ic_close.svg'),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    log('${controller.currentPage}');
+                    controller.triggerRight();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(28.25),
+                    decoration: BoxDecoration(
+                        color: Color(0xffE94057),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0xff000000).withOpacity(0.07),
+                              offset: Offset(0, 20),
+                              blurRadius: 50)
+                        ]),
+                    child: SvgPicture.asset('assets/icons/ic_tym.svg'),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    controller.triggerUp();
+                  },
+                  child: Container(
+                    height: 78,
+                    width: 78,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0xff000000).withOpacity(0.07),
+                              offset: Offset(0, 20),
+                              blurRadius: 50)
+                        ]),
+                    child: SvgPicture.asset('assets/icons/ic_start.svg'),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

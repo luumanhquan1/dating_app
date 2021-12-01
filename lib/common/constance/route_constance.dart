@@ -3,4 +3,5 @@ class RouteList{
   static const singIn='\SingIn';
   static const myMobile='\myMobile';
   static const otpScreen="\otpScreen";
+  static const profileScreen="\profileScreen";
 }

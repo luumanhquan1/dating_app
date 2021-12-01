@@ -35,6 +35,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
           pageOffset = widget.pageController.page;
         });
       });
+
   }
 
   @override

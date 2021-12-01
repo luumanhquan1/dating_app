@@ -32,7 +32,7 @@ class BottomNavigatorWidget extends StatelessWidget {
   Widget tabItem(tabBarItem item) {
     return Icon(
       item.icon(),
-      size: 18,
+      size: 20,
     );
   }
 }

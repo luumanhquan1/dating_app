@@ -35,6 +35,7 @@ class ThemeDataSetUp {
       headline1: headlineText,
       headline2: headline2Text,
     ),
+    fontFamily: "Ag",
     canvasColor: ColorsHex.getColorFromHex('#000000'),
     backgroundColor: ColorsHex.getColorFromHex('#FFFFFF'),
     buttonColor: ColorsHex.getColorFromHex('#E94057'),
