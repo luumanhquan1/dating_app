@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:dating_app/common/BusinessLayer/DataAccess/Http/Core/Di/di.dart';
+import 'package:dating_app/common/BusinessLayer/DataAccess/Http/socket_client.dart';
 import 'package:dating_app/presentation/journey/tabbar/tabbar_item.dart';
 import 'package:dating_app/presentation/journey/tabbar/widgets/botom_navigator_widget.dart';
 
@@ -15,8 +17,11 @@ class TabbarScreen extends StatefulWidget {
 class _TabbarScreenState extends State<TabbarScreen>
     with SingleTickerProviderStateMixin,AutomaticKeepAliveClientMixin {
   late TabController tabController;
+  final SocketClient socketClient=getIt<SocketClient>();
   @override
   void initState() {
+    socketClient.connect();
+
     // TODO: implement initState
     tabController = TabController(length: 4, vsync: this);
     tabController.addListener(() {

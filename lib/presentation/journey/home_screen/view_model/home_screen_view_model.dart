@@ -1,12 +1,14 @@
 
+import 'dart:developer';
+
 import 'package:dating_app/common/BusinessLayer/DataAccess/Http/Core/Di/di.dart';
 import 'package:dating_app/data/remote_data/model/user_model.dart';
 
 import 'package:dating_app/domain/usecase/home_usecase.dart';
 import 'package:rxdart/rxdart.dart';
-
+enum onTrangThai{close,tym,superLike}
 class HomeViewModel {
-  // final HomeUseCase useCase;
+
    HomeUseCase get useCase=>getIt<HomeUseCase>();
 
    BehaviorSubject<List<UserModel>> _getListUser = BehaviorSubject<List<UserModel>>();
@@ -21,7 +23,9 @@ class HomeViewModel {
       _getListUser.sink.add(data);
     }
   }
-
+  void thaoTacUser(String id,{onTrangThai? trangThai}){
+     useCase.thichUserRemote(id,trangThai: trangThai);
+  }
  void dispose() {
    _getListUser.close();
   }

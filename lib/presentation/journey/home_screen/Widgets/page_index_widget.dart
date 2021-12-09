@@ -14,6 +14,14 @@ class PageIndexWidget extends StatefulWidget {
 class _PageIndexWidgetState extends State<PageIndexWidget> {
   double index = 0.0;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.controller.addListener(() {
+      index = widget.controller.page ?? 0;
+      setState(() {});
+    });
+  }
   void didUpdateWidget(covariant PageIndexWidget oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);

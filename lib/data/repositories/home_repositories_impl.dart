@@ -12,4 +12,11 @@ class HomeRepositoriesImpl implements HomeRepositories{
         return homeService.getListUserRemote();
   }
 
+  @override
+  Future<void> thichUser(Map<String, dynamic> data) async {
+   await homeService.thichUser(data);
+  }
+
+
+
 }

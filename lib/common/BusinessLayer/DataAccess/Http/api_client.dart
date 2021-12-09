@@ -49,17 +49,15 @@ class ApiClient {
   }
 
   Future<void> useAuthenTokenIfNeed({bool isDowloadFile = false}) async {
-
-
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final authtoken = prefs.getString(SharedPreferencesKeys.AUTH_TOKEN) ?? '';
     if (dio.options.headers.isEmpty) {
       dio.options.headers = {};
     }
+    if (authtoken.isNotEmpty) {
+      dio.options.headers['token'] = authtoken;
+    }
 
-
-      dio.options.headers['token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc1N1Y2Nlc3MiOnRydWUsImlkIjoiNTc2NDdmNzAtNGExNy0xMWVjLWI5ZDUtYzNhNjhjYzYwMmY1IiwiaWF0IjoxNjM3ODk1NDM0fQ.4ufoVAD1Y227EGPYJBjDsDclP2UvsgzWkq15xHqhvQE';
-    // }
     dio.options.setRequestContentTypeWhenNoPayload = true;
     dio.options.receiveDataWhenStatusError = true;
     dio.options.headers['contentType'] = Headers.jsonContentType;

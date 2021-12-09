@@ -5,6 +5,7 @@ class EnvData {
   final bool debugApiClient;
   final String apiBaseUrl;
   final String apiToken;
+  final String apiUrlSocket;
 
   EnvData({
     required this.debug,
@@ -13,5 +14,6 @@ class EnvData {
     required this.debugApiClient,
     required this.apiBaseUrl,
     required this.apiToken,
+    required this.apiUrlSocket
   });
 }

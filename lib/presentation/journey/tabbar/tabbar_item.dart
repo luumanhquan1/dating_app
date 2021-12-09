@@ -1,5 +1,7 @@
 import 'package:dating_app/common/icons/datting_icons.dart';
 import 'package:dating_app/presentation/journey/home_screen/home_screen.dart';
+import 'package:dating_app/presentation/journey/match_screen/match_screen.dart';
+import 'package:dating_app/presentation/journey/message_screen/message_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +25,9 @@ extension tabbarEx on tabBarItem{
       case tabBarItem.Home:
         return HomeScreen();
       case tabBarItem.Match:
-        return Scaffold();
+        return MatchScreen();
       case tabBarItem.message:
-        return  Scaffold();
+        return  MessageScreen();
       case tabBarItem.account:
         return  Scaffold();
     }

@@ -20,7 +20,9 @@ class Env {
       debugShowMaterialGrid: false,
       debugApiClient: true,
       apiBaseUrl: UrlConstants.DEV_API_BASE_URL,
-      apiToken: '');
+      apiToken: '',
+      apiUrlSocket: UrlConstants.DEV_API_BASE_URL_SOCKET
+  );
 
   static final EnvData prod = EnvData(
       debug: false,
@@ -28,5 +30,7 @@ class Env {
       debugShowMaterialGrid: false,
       debugApiClient: false,
       apiBaseUrl: UrlConstants.PROD_API_URL,
-      apiToken: '');
+      apiToken: '',
+   apiUrlSocket: UrlConstants.PROD_API_URL_SOCKET
+  );
 }

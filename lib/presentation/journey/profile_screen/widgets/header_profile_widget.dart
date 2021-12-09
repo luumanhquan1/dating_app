@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating_app/common/constance/hero_constance.dart';
 import 'package:dating_app/presentation/journey/widgets/base_button_rectan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +30,7 @@ class HeaderProfileWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.red,
                   image: DecorationImage(
-                      image: NetworkImage(urlImg), fit: BoxFit.cover)),
+                      image: CachedNetworkImageProvider(urlImg), fit: BoxFit.cover)),
               child: Stack(
                 children: [
                   Positioned(
@@ -70,72 +72,75 @@ class HeaderProfileWidget extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              margin: EdgeInsets.only(left: 40, right: 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      onClose();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(31.5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xff000000).withOpacity(0.07),
-                                offset: Offset(0, 20),
-                                blurRadius: 50)
-                          ]),
-                      child: SvgPicture.asset('assets/icons/ic_close.svg'),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      onTym();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(28.25),
-                      decoration: BoxDecoration(
-                          color: Color(0xffE94057),
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xff000000).withOpacity(0.07),
-                                offset: Offset(0, 15),
-                                blurRadius: 15)
-                          ]),
-                      child: SvgPicture.asset(
-                        'assets/icons/ic_tym.svg',
-                        height: 42.5,
-                        width: 36.47,
+            child: Hero(
+              tag: HeroConstance.keyHeroLikeConstance,
+              child: Container(
+                margin: EdgeInsets.only(left: 40, right: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        onClose();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(31.5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xff000000).withOpacity(0.07),
+                                  offset: Offset(0, 20),
+                                  blurRadius: 50)
+                            ]),
+                        child: SvgPicture.asset('assets/icons/ic_close.svg'),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      onMess();
-                    },
-                    child: Container(
-                      height: 78,
-                      width: 78,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xff000000).withOpacity(0.07),
-                                offset: Offset(0, 20),
-                                blurRadius: 50)
-                          ]),
-                      child: SvgPicture.asset('assets/icons/ic_start.svg'),
+                    GestureDetector(
+                      onTap: () {
+                        onTym();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(28.25),
+                        decoration: BoxDecoration(
+                            color: Color(0xffE94057),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xff000000).withOpacity(0.07),
+                                  offset: Offset(0, 15),
+                                  blurRadius: 15)
+                            ]),
+                        child: SvgPicture.asset(
+                          'assets/icons/ic_tym.svg',
+                          height: 42.5,
+                          width: 36.47,
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        onMess();
+                      },
+                      child: Container(
+                        height: 78,
+                        width: 78,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xff000000).withOpacity(0.07),
+                                  offset: Offset(0, 20),
+                                  blurRadius: 50)
+                            ]),
+                        child: SvgPicture.asset('assets/icons/ic_start.svg'),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ))
       ],

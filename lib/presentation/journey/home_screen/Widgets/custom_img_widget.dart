@@ -58,14 +58,14 @@ class _ListImgWidgetState extends State<ListImgWidget> {
               itemBuilder: (context, index) {
                 final data = widget.listImg[index];
                 return Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage('assets/imgs/photo.png'),fit: BoxFit.cover)
-                  ),
-                  // child: CachedNetworkImage(
-                  //   imageUrl: data.url??'',
-                  //   errorWidget: (context, url, error) => Icon(Icons.error),
-                  //   fit: BoxFit.cover,
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(image: AssetImage('assets/imgs/photo.png'),fit: BoxFit.cover)
                   // ),
+                  child: CachedNetworkImage(
+                    imageUrl: data.url??'',
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.cover,
+                  ),
                 );
               }),
         ),

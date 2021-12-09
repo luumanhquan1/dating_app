@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:dating_app/common/constance/hero_constance.dart';
 import 'package:dating_app/data/remote_data/model/user_model.dart';
 import 'package:dating_app/presentation/journey/home_screen/Widgets/custom_img_widget.dart';
 import 'package:dating_app/presentation/journey/home_screen/Widgets/infor_user_widget.dart';
@@ -12,9 +13,6 @@ import 'package:dating_app/presentation/journey/widgets/tinder_widget.dart/tinde
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:blur/blur.dart';
-
-import 'Widgets/icon_set_trang_thai_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -64,10 +62,13 @@ class _HomeScreenState extends State<HomeScreen>
                   if (snapshot.hasData) {
                     return TinderSwapCard(
                       swipeCompleteCallback: (origin, index) {
-                        // log('${index}');
+                        if(origin==CardSwipeOrientation.RIGHT){
+                          viewModel.thaoTacUser(data[index].id,trangThai: onTrangThai.tym);
+                        }
+
                       },
                       swipeUpdateCallback: (a, w) {
-                        // log('${w}');
+
                       },
                       orientation: AmassOrientation.TOP,
                       stackNum: 2,
@@ -81,10 +82,31 @@ class _HomeScreenState extends State<HomeScreen>
                         final List<ListImg> listImg = data[index].listImg;
                         final PageController pageController = PageController();
                         return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    ProfileScreen(id: userInfor.id)));
+                          onTap: () async {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(
+                                    builder: (context) => ProfileScreen(
+                                          id: userInfor.id,
+                                          urlImg:
+                                              userInfor.listImg.first.url ?? '',
+                                        )),
+
+                            )
+                                .then((value) {
+                              if (value != null) {
+                                onTrangThai trangThai = value;
+                                switch(trangThai){
+                                  case onTrangThai.close:
+                                    controller.triggerLeft();
+                                    break;
+                                  case onTrangThai.tym:
+                                    controller.triggerRight();
+                                    break;
+                                  case onTrangThai.superLike:
+                                    controller.triggerUp();
+                                }
+                              }
+                            });
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -134,69 +156,71 @@ class _HomeScreenState extends State<HomeScreen>
                   return SizedBox();
                 }),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 40, right: 40, bottom: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    controller.triggerLeft();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(31.5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xff000000).withOpacity(0.07),
-                              offset: Offset(0, 20),
-                              blurRadius: 50)
-                        ]),
-                    child: SvgPicture.asset('assets/icons/ic_close.svg'),
+          Hero(
+            tag: HeroConstance.keyHeroLikeConstance,
+            child: Container(
+              margin: EdgeInsets.only(left: 40, right: 40, bottom: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.triggerLeft();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(31.5),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xff000000).withOpacity(0.07),
+                                offset: Offset(0, 20),
+                                blurRadius: 50)
+                          ]),
+                      child: SvgPicture.asset('assets/icons/ic_close.svg'),
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    log('${controller.currentPage}');
-                    controller.triggerRight();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(28.25),
-                    decoration: BoxDecoration(
-                        color: Color(0xffE94057),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xff000000).withOpacity(0.07),
-                              offset: Offset(0, 20),
-                              blurRadius: 50)
-                        ]),
-                    child: SvgPicture.asset('assets/icons/ic_tym.svg'),
+                  GestureDetector(
+                    onTap: () {
+                      controller.triggerRight();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(28.25),
+                      decoration: BoxDecoration(
+                          color: Color(0xffE94057),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xff000000).withOpacity(0.07),
+                                offset: Offset(0, 20),
+                                blurRadius: 50)
+                          ]),
+                      child: SvgPicture.asset('assets/icons/ic_tym.svg'),
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    controller.triggerUp();
-                  },
-                  child: Container(
-                    height: 78,
-                    width: 78,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xff000000).withOpacity(0.07),
-                              offset: Offset(0, 20),
-                              blurRadius: 50)
-                        ]),
-                    child: SvgPicture.asset('assets/icons/ic_start.svg'),
-                  ),
-                )
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      controller.triggerUp();
+                    },
+                    child: Container(
+                      height: 78,
+                      width: 78,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xff000000).withOpacity(0.07),
+                                offset: Offset(0, 20),
+                                blurRadius: 50)
+                          ]),
+                      child: SvgPicture.asset('assets/icons/ic_start.svg'),
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],

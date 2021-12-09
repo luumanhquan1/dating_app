@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dating_app/common/constance/route_constance.dart';
+import 'package:dating_app/presentation/journey/splash_screen/splash_screen.dart';
 import 'package:dating_app/presentation/journey/tabbar/tabbar_screen.dart';
 import 'package:dating_app/routes.dart';
 import 'package:dating_app/thems/theme_data.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeDataSetUp.themeDate,
         onGenerateRoute: Routes.generateRoute,
         // initialRoute: RouteList.onBoarding,
-        home: TabbarScreen(),
+        home: SplashScreen(),
       ),
     );
   }

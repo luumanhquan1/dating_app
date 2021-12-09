@@ -4,4 +4,5 @@ import 'package:dating_app/data/remote_data/model/user_model.dart';
 
 abstract class HomeRepositories{
   Future<DataChanel<String,List<UserModel>>> getListUser();
+  Future<void> thichUser(Map<String,dynamic> data);
 }

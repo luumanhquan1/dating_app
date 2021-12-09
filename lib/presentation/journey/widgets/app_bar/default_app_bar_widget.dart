@@ -5,8 +5,9 @@ class DefaultAppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final Widget? leadingIcon;
   final Widget? actionIcon;
   final String title;
+  final bool isBorderLeading;
   const DefaultAppBarWidget(
-      {Key? key, this.leadingIcon, this.title = '', this.actionIcon})
+      {Key? key, this.leadingIcon, this.title = '', this.actionIcon,this.isBorderLeading=true})
       : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class DefaultAppBarWidget extends StatelessWidget with PreferredSizeWidget {
         child: Padding(
             padding: EdgeInsets.only(left: 40),
             child:
-                leadingIcon == null ? const SizedBox() : item(leadingIcon, 19)),
+                leadingIcon == null ? const SizedBox() :isBorderLeading?item(leadingIcon, 19):leadingIcon),
       ),
       actions: [
        actionIcon==null?const SizedBox(): Padding(
