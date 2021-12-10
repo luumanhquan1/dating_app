@@ -8,6 +8,7 @@ import 'package:dating_app/presentation/journey/profile_screen/profile_viewmodel
 import 'package:dating_app/presentation/journey/profile_screen/widgets/gallery_widget.dart';
 import 'package:dating_app/presentation/journey/profile_screen/widgets/header_profile_widget.dart';
 import 'package:dating_app/presentation/journey/profile_screen/widgets/interests_widget.dart';
+import 'package:dating_app/presentation/journey/widgets/show_bottom_mess_widget/show_bottom_mess_widget.dart';
 import 'package:dating_app/presentation/journey/widgets/title_child_widget.dart';
 import 'package:dating_app/presentation/journey/widgets/base_button_rectan.dart';
 import 'package:dating_app/presentation/journey/widgets/read_more_widget.dart';
@@ -97,7 +98,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ],
                                 ),
                                 BaseButtonRectan(
-                                  onTap: () {},
+                                  onTap: () {
+                                    showBottomMessWidget(context,idNguoiNhan: data.id);
+                                  },
                                   icon: SvgPicture.asset(
                                       'assets/icons/ic_send_mess.svg'),
                                 )
