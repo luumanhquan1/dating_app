@@ -21,10 +21,9 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends State<MessageScreen> {
-  late Socket socket;
+
   @override
   void initState() {
-    SocketClient().connect();
     super.initState();
   }
 
